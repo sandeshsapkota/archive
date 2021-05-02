@@ -1,0 +1,30 @@
+body {
+    color: var(--color-base-1);
+    padding: 40px 112px;
+}
+
+svg {
+    min-width: 16px;
+    width: 16px;
+    height: 16px;
+}
+
+input {
+    border-color: var(--color-border);
+}
+
+hr {
+    margin: 4px 0 0;
+}
+
+.form-control {
+    border: 1px solid var(--color-border);
+    padding: 8px 12px;
+    border-radius: 6px;;
+
+    &:focus {
+        outline: none;
+    }
+
+}
+
