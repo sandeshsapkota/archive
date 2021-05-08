@@ -7,7 +7,7 @@
 <script>
     import Header      from "./Header"
     import Icon        from "./Icon"
-    import messageList from "./script"
+    import messageList from "../script"
     import SortIcon    from "./SortIcon"
 
     export default {
