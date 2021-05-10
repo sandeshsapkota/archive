@@ -1,0 +1,44 @@
+table {
+    width: 100%;
+    text-align: left;
+
+    thead {
+        background: var(--color-gray-1);
+        padding: 16px 12px;
+        border-bottom: 2px solid var(--color-border);
+        border-top: 2px solid var(--color-border);
+        font-weight: inherit;
+    }
+
+    td, th {
+        padding: 12px;
+    }
+
+    tr {
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .sort--active {
+        color: #000;
+    }
+
+}
+
+.badge {
+    padding: 1px 4px;
+    background: #8d8d8d;
+    color: #fff;
+    font-size: 13px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.rotate-caret,.sort--active {
+    .caret {
+        transform: rotate(-180deg);
+    }
+}
+
+.caret {
+    transition: .3s all;
+}

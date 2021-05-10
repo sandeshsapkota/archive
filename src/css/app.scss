@@ -1,5 +1,43 @@
-@import "abstract/base";
+@import "abstract/variable";
 @import "abstract/reset";
+@import "abstract/base";
+@import "components/table";
 @import "pages/homepage";
 
+.c-content {
+    &-item {
+        border-radius: 8px;
+        overflow: hidden;
+    }
 
+    &-item--right {
+        min-height: 280px;
+    }
+
+    &-item--right &-body {
+        color: white;
+    }
+
+    &-head {
+        background: #f8f8f8;
+        color: #333;
+        font-size: 24px;
+    }
+
+    &-head, &-body {
+        padding: 16px;
+    }
+
+    p {
+        margin-bottom: 16px;
+    }
+
+    .scrollable {
+        height: calc(100% - 94px);
+        width: 100%;
+        overflow: auto;
+        position: absolute;
+        top: 94px;
+        left: 0;
+    }
+}
