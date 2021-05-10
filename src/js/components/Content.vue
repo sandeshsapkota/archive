@@ -1,6 +1,36 @@
 <template>
-    <div class="container bg-black-100 text-white text-2xl">
-        Sombar
+    <div class="container bg-blacktext-white text-2xl">
+        <table>
+            <thead>
+                <th v-text="'From'"/>
+                <th style="width: 27%;" v-text="'To'"/>
+                <th v-text="'Subject'">
+                <th
+                    @click="handleSort(messageList,'date')" :class="this.sortBy === 'date' ? 'sort--active cursor-pointer' : 'cursor-pointer'">
+                    <div class="flex items-center gap-1">
+                        <span v-text="'Date'"/>
+                        <Icon name="caret" class="caret h-1.5"/>
+                    </div>
+                </th>
+            </thead>
+            <tbody>
+                <tr v-for="(message,index) in messageList">
+                    <td v-text="message.from"></td>
+                    <td>
+                        <div class="flex justify-between items-start pr-4">
+                            <div class="flex">
+                                <span v-text="message.to"/>
+                                <span v-if="message.to.length > 1" v-text="', ...'"/>
+                            </div>
+                            <span v-if="message.to.length > 1" class="badge" v-text="'+' + (message.to.length - 1)"></span>
+                        </div>
+                    </td>
+                    <td v-text="message.sub"></td>
+                    <td v-text="message.date" :class="this.sortBy === 'date' ? 'sort--active' : ''"></td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 </template>
 
@@ -17,41 +47,40 @@
             return {
                 messageList: [],
                 sortOrder: "asc",
-                sortBy: "",
+                sortBy: "date",
             }
         },
         mounted() {
             this.messageList = [...messageList]
-            this.handleSort("date")
+            this.handleSort(messageList, "date")
         },
         methods: {
             handleSort: function(arr, sortBy) {
-                // const arr = [
-                //     { name: "Sandesh", age: 25 },
-                //     { name: "Ramila", age: 19 },
-                //     { name: "Pritvi", age: 28 },
-                // ]
-
                 arr = [...arr]
 
                 let sortedArr = []
+
                 this.sortBy = sortBy
 
-                if (this.sortOrder === "asc") {
-
-                    sortedArr = arr.sort((a, b) => {
-                        if (a[this.sortBy] > b[this.sortBy]) {
-                            return 1
-                        }
-                        if (a[this.sortBy] < b[this.sortBy]) {
-                            return -1
-                        }
-                        return 0
-                    })
-                }
-
                 if (this.sortOrder === "dsc") {
+                    // making in asc
                     sortedArr = arr.sort((a, b) => {
+                        if (a[this.sortBy] > b[this.sortBy]) {
+                            return 1
+                        }
+                        if (a[this.sortBy] < b[this.sortBy]) {
+                            return -1
+                        }
+                        return 0
+                    })
+
+                }
+
+                if (this.sortOrder === "asc") {
+                    // making in dsc
+                    sortedArr = arr.sort((a, b) => {
+                        console.log(a, b)
+
                         if (a[this.sortBy] > b[this.sortBy]) {
                             return -1
                         }
@@ -60,53 +89,15 @@
                         }
                         return 0
                     })
-
                 }
 
-                if (this.sortOrder === "asc") {
-                    this.sortOrder = "dsc"
-                } else {
-                    this.sortOrder = "asc"
-                }
-
+                this.messageList = [...sortedArr]
+                this.sortOrder === "asc" ? this.sortOrder = "dsc" : this.sortOrder = "asc"
             },
 
             handleCopy(index) {
                 console.log("copying", index)
             },
-
-            caretClass(sortBy) {
-                let classes
-                if (this.sortBy === sortBy) {
-                    classes = "caret--active"
-                }
-                if (this.sortOrder === "dsc") {
-                    classes = "caret--active caret--dsc"
-                }
-                return classes
-            },
         },
     }
 </script>
-
-<style lang="scss">
-    .c-table__th,
-    .c-table__td {
-
-        &:nth-child(1) {
-            width: 20%;
-        }
-
-        &:nth-child(2) {
-            width: 30%;
-        }
-
-        &:nth-child(3) {
-            width: 35%;
-        }
-
-        &:nth-child(4) {
-            width: 15%;
-        }
-    }
-</style>
